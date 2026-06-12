@@ -99,11 +99,12 @@ body{
   border-left-color:var(--primary);font-weight:600;
 }
 .main-content{
-  margin-left:var(--sidebar-w);padding-top:calc(var(--header-h)+28px);
+  margin-left:var(--sidebar-w);padding-top:calc(var(--header-h)+40px);
   padding-bottom:80px;padding-left:40px;padding-right:40px;
   max-width:calc(var(--sidebar-w)+860px);
 }
-.faq-section{margin-bottom:44px}
+.faq-section{margin-bottom:44px;scroll-margin-top:calc(var(--header-h)+16px)}
+.faq-section:first-of-type{margin-top:8px}
 .section-title{
   font-size:19px;font-weight:700;color:var(--text);
   padding:14px 20px;background:linear-gradient(135deg,var(--primary-light),#ede9fe);
