@@ -16,16 +16,21 @@
   --shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.06);
   --shadow-hover:0 4px 16px rgba(37,99,235,.15);
 }
-html{scroll-behavior:smooth}
+html{
+  overflow-x:hidden;
+  overflow-y:scroll;
+}
 body{
   font-family:-apple-system,"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif;
   background:var(--bg);color:var(--text);line-height:1.7;font-size:15px;
+  overflow-x:hidden;
+  min-height:100vh;
 }
 .top-header{
   position:fixed;top:0;left:0;right:0;height:var(--header-h);
   background:var(--surface);border-bottom:1px solid var(--border);
   display:flex;align-items:center;gap:16px;padding:0 24px;z-index:100;
-  box-shadow:0 1px 6px rgba(0,0,0,.06);backdrop-filter:blur(10px);
+  box-shadow:0 1px 6px rgba(0,0,0,.06);
 }
 .header-logo{
   display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;
@@ -99,9 +104,11 @@ body{
   border-left-color:var(--primary);font-weight:600;
 }
 .main-content{
-  margin-left:var(--sidebar-w);padding-top:calc(var(--header-h)+40px);
+  margin-left:var(--sidebar-w);
+  padding-top:calc(var(--header-h)+40px);
   padding-bottom:80px;padding-left:40px;padding-right:40px;
   max-width:calc(var(--sidebar-w)+860px);
+  min-width:0;
 }
 .faq-section{margin-bottom:44px;scroll-margin-top:calc(var(--header-h)+16px)}
 .faq-section:first-of-type{margin-top:8px}
@@ -118,7 +125,7 @@ body{
 }
 .qa-card:hover{border-color:#bfdbfe;box-shadow:var(--shadow-hover)}
 .qa-card.open{border-color:var(--primary)}
-.qa-card.hidden{display:none}
+.qa-card.hidden{display:none!important}
 .qa-card.highlight{border-color:#f59e0b;background:#fffbeb}
 .qa-question{
   display:flex;align-items:flex-start;gap:12px;padding:14px 20px;
@@ -139,11 +146,20 @@ body{
   transition:transform .25s;margin-top:4px;
 }
 .qa-card.open .q-toggle{transform:rotate(180deg)}
+
+/* ===== 展开/折叠：用 grid template-rows 替代 max-height hack ===== */
 .qa-answer{
-  max-height:0;overflow:hidden;
-  transition:max-height .35s cubic-bezier(0,1,.5,1);
+  display:grid;
+  grid-template-rows:0fr;
+  transition:grid-template-rows .35s ease;
 }
-.qa-card.open .qa-answer{max-height:9999px}
+.qa-card.open .qa-answer{
+  grid-template-rows:1fr;
+}
+.qa-answer > .answer-inner{
+  overflow:hidden;
+}
+
 .answer-inner{padding:18px 22px 22px;border-top:1px solid var(--border)}
 .answer-inner p{margin-bottom:7px;color:var(--text);line-height:1.8}
 .answer-inner p:last-child{margin-bottom:0}
@@ -159,18 +175,32 @@ body{
   color:var(--primary);text-decoration:none;border-bottom:1px dashed var(--primary);
 }
 .answer-inner a:hover{border-bottom-style:solid}
+
+/* ===== 图片容器：固定宽高比防止布局抖动 ===== */
 .img-wrap{
   margin:14px 0;border-radius:8px;overflow:hidden;
   border:1px solid var(--border);box-shadow:var(--shadow);
-  background:#f1f5f9;text-align:center;min-height:30px;
+  background:#f1f5f9;text-align:center;
+  position:relative;
+  min-height:120px;
 }
 .img-wrap img{
   max-width:100%;height:auto;display:block;cursor:zoom-in;
-  transition:opacity .15s;opacity:0;
-  animation:fadeInImg .4s ease forwards;
+  transition:opacity .3s;
+  opacity:0;
 }
-@keyframes fadeInImg{to{opacity:1}}
+.img-wrap img.loaded{opacity:1}
 .img-wrap img:hover{opacity:.88}
+.img-wrap::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,#f1f5f9 25%,#e2e8f0 25%,#e2e8f0 50%,#f1f5f9 50%,#f1f5f9 75%,#e2e8f0 75%);
+  background-size:20px 20px;z-index:0;
+  animation:shimmer 1.5s infinite linear;
+  opacity:.5;
+}
+.img-wrap img.loaded + ::after{display:none}
+@keyframes shimmers{0%{background-position:0 0}100%{background-position:40px 40px}}
+
 .search-hl{background:#fef08a;border-radius:2px;padding:0 1px}
 #noResult{
   display:none;text-align:center;padding:70px 24px;color:var(--text-muted);
@@ -221,7 +251,7 @@ body{
 @media print{
   .top-header,.sidebar,#backTop,.lb-overlay{display:none!important}
   .main-content{margin:0;padding:0}
-  .qa-answer{max-height:none!important}
+  .qa-answer{display:block!important}
 }
 </style>
 </head>
@@ -1057,13 +1087,26 @@ body{
   <div class="lb-hint">点击空白或按 ESC 关闭</div>
 </div>
 
-<button id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="回到顶部">&#8593;</button>
+<button id="backTop" onclick="toTop()" title="回到顶部">&#8593;</button>
 
 <script>
+/* ─── 展开/折叠 ─── */
 function toggleQA(n){var c=document.getElementById('qa-'+n);if(c)c.classList.toggle('open')}
 function expandAll(){document.querySelectorAll('.qa-card:not(.hidden)').forEach(function(c){c.classList.add('open')})}
 function collapseAll(){document.querySelectorAll('.qa-card').forEach(function(c){c.classList.remove('open')})}
 
+/* ─── 回到顶部 ─── */
+function toTop(){
+  window.cancelAnimationFrame(window._stRaf);
+  var st=window.scrollY,d=0,t=performance.now()+350;
+  (function step(now){
+    d=Math.min(1,(now-t+350)/350);
+    window.scrollTo(0,st*(1-d));
+    if(d<1)window._stRaf=requestAnimationFrame(step);
+  })(t);
+}
+
+/* ─── 搜索 ─── */
 function searchFAQ(){
   var kw=document.getElementById('searchInput').value.trim();
   var badge=document.getElementById('resultBadge');
@@ -1078,15 +1121,15 @@ function searchFAQ(){
       v++;card.classList.add('open');
       if(kw){
         var qEl=card.querySelector('.q-text');
-        if(qEl) qEl.innerHTML=hl(qEl.textContent,kw);
+        if(qEl)qEl.innerHTML=hl(qEl.textContent,kw);
         card.querySelectorAll('.answer-inner p').forEach(function(p){
-          if(p.textContent.toLowerCase().includes(kw.toLowerCase())) p.innerHTML=hl(p.textContent,kw)
+          if(p.textContent.toLowerCase().includes(kw.toLowerCase()))p.innerHTML=hl(p.textContent,kw)
         })
       }else card.classList.remove('open')
     }
   });
   document.querySelectorAll('.faq-section').forEach(function(s){
-    s.style.display=Array.from(s.querySelectorAll('.qa-card')).some(function(c){return !c.classList.contains('hidden')})?'':'none'
+    s.style.display=Array.from(s.querySelectorAll('.qa-card')).some(function(c){return!c.classList.contains('hidden')})?'':'none'
   });
   badge.textContent=kw?'找到 '+v+' 条':'';
   badge.style.display=kw&&v>0?'inline-block':'none';
@@ -1098,39 +1141,76 @@ function hl(t,kw){
 }
 function clearSearch(){document.getElementById('searchInput').value='';searchFAQ()}
 
+/* ─── 灯箱 ─── */
 function lbOpen(src){
   document.getElementById('lbImg').src=src;
   document.getElementById('lbOverlay').classList.add('active');
-  document.body.style.overflow='hidden'
+  document.body.style.overflow='hidden';
 }
 function lbHide(e){
-  if(e) e.stopPropagation();
+  if(e)e.stopPropagation();
   document.getElementById('lbOverlay').classList.remove('active');
-  document.body.style.overflow=''
+  document.body.style.overflow='';
 }
 function lbBgClick(e){if(e.target===e.currentTarget)lbHide()}
 document.addEventListener('keydown',function(e){if(e.key==='Escape')lbHide(null)});
 
+/* ─── 导航高亮 ─── */
 function navClick(el){
   document.querySelectorAll('.sidebar a').forEach(function(a){a.classList.remove('active')});
-  el.classList.add('active')
+  el.classList.add('active');
 }
-var secs=document.querySelectorAll('.faq-section'),
-    navs=document.querySelectorAll('.sidebar a');
-window.addEventListener('scroll',function(){
-  var y=window.scrollY+100;
-  secs.forEach(function(s,i){
-    if(s.offsetTop<=y){
-      navs.forEach(function(a){a.classList.remove('active')});
-      if(navs[i]) navs[i].classList.add('active')
-    }
-  });
-  var bt=document.getElementById('backTop');
-  bt.classList.toggle('visible',window.scrollY>300)
-},{passive:true});
 
+/* ─── 滚动监听 ─── */
+(function(){
+  var secs=document.querySelectorAll('.faq-section'),
+      navs=document.querySelectorAll('.sidebar a'),
+      ticking=false;
+  window.addEventListener('scroll',function(){
+    if(!ticking){
+      requestAnimationFrame(function(){
+        var y=window.scrollY+120;
+        var activeIdx=-1;
+        for(var i=secs.length-1;i>=0;i--){
+          if(secs[i].offsetTop<=y){activeIdx=i;break}
+        }
+        navs.forEach(function(a,i){a.classList.toggle('active',i===activeIdx)});
+        var bt=document.getElementById('backTop');
+        bt.classList.toggle('visible',window.scrollY>300);
+        ticking=false;
+      });
+      ticking=true;
+    }
+  },{passive:true})();
+})();
+
+/* ─── 图片懒加载增强 ─── */
+document.addEventListener('DOMContentLoaded',function(){
+  var imgs=document.querySelectorAll('.img-wrap img');
+  if('IntersectionObserver' in window){
+    var obs=new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          var img=entry.target;
+          if(img.dataset.src){img.src=img.src;delete img.dataset.src}
+          obs.unobserve(img);
+        }
+      });
+    },{rootMargin:'200px'});
+    imgs.forEach(function(img){obs.observe(img)});
+  }
+  /* 所有图片加载完成后显示 */
+  imgs.forEach(function(img){
+    if(img.complete)img.classList.add('loaded');
+    else img.addEventListener('load',function(){this.classList.add('loaded')});
+    img.addEventListener('error',function(){this.classList.add('loaded');this.alt='图片加载失败'});
+  });
+})();
+
+/* ─── 初始状态：默认展开第一个章节 ─── */
 document.querySelectorAll('#section-0 .qa-card').forEach(function(c){c.classList.add('open')});
-if(navs[0]) navs[0].classList.add('active');
+var initNav=document.querySelectorAll('.sidebar a');
+if(initNav[0])initNav[0].classList.add('active');
 </script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","name":"新HRMS系统常见问题FAQ","description":"基于《新HRMS系统操作SOP》整理"}</script>
 </body></html>
