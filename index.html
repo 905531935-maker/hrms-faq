@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新 HRMS 系统 FAQ — 常见问题解答</title>
+<meta name="description" content="基于《新HRMS系统操作SOP》整理的常见问题解答，含完整操作截图">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --primary:#2563eb;--primary-light:#dbeafe;--primary-dark:#1d4ed8;
+  --accent:#7c3aed;--success:#059669;--bg:#f8fafc;
+  --surface:#fff;--border:#e2e8f0;--text:#1e293b;
+  --text-muted:#64748b;--text-light:#94a3b8;
+  --sidebar-w:260px;--header-h:60px;--radius:12px;
+  --shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.06);
+  --shadow-hover:0 4px 16px rgba(37,99,235,.15);
+}
+html{
+  overflow-x:hidden;
+  overflow-y:scroll;
+}
+body{
+  font-family:-apple-system,"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.7;font-size:15px;
+  overflow-x:hidden;
+  min-height:100vh;
+}
+.top-header{
+  position:fixed;top:0;left:0;right:0;height:var(--header-h);
+  background:var(--surface);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:16px;padding:0 24px;z-index:100;
+  box-shadow:0 1px 6px rgba(0,0,0,.06);
+}
+.header-logo{
+  display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;
+  color:var(--primary);white-space:nowrap;flex-shrink:0;
+}
+.header-logo .logo-icon{
+  width:34px;height:34px;background:var(--primary);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;color:#fff;
+  font-size:14px;font-weight:800;
+}
+.header-divider{width:1px;height:28px;background:var(--border)}
+.search-wrap{
+  flex:1;max-width:480px;display:flex;align-items:center;
+  background:var(--bg);border:1.5px solid var(--border);
+  border-radius:24px;overflow:hidden;transition:border-color .2s,box-shadow .2s;
+}
+.search-wrap:focus-within{
+  border-color:var(--primary);box-shadow:0 0 0 3px rgba(37,99,235,.1);
+}
+.search-icon{padding:0 12px 0 16px;color:var(--text-light);font-size:15px}
+#searchInput{
+  flex:1;border:none;background:transparent;padding:9px 4px;
+  font-size:14px;color:var(--text);outline:none;
+}
+.search-clear{
+  padding:0 14px;color:var(--text-light);cursor:pointer;
+  font-size:16px;display:none;
+}
+.search-clear:hover{color:var(--text)}
+#resultBadge{
+  margin-left:8px;padding:2px 10px;background:var(--primary-light);
+  color:var(--primary);border-radius:20px;font-size:12px;
+  font-weight:600;white-space:nowrap;display:none;
+}
+.header-actions{display:flex;gap:8px;margin-left:auto;flex-shrink:0}
+.btn-ghost{
+  padding:7px 13px;border-radius:8px;border:1.5px solid var(--border);
+  background:transparent;color:var(--text-muted);font-size:13px;
+  cursor:pointer;transition:all .15s;white-space:nowrap;
+}
+.btn-ghost:hover{
+  background:var(--primary-light);border-color:var(--primary);color:var(--primary);
+}
+.sidebar{
+  position:fixed;left:0;top:var(--header-h);bottom:0;width:var(--sidebar-w);
+  background:var(--surface);border-right:1px solid var(--border);
+  overflow-y:auto;z-index:90;padding:18px 0;
+  scrollbar-width:thin;scrollbar-color:transparent transparent;
+}
+.sidebar::-webkit-scrollbar{width:4px}
+.sidebar::-webkit-scrollbar-thumb{background:transparent}
+.sidebar:hover::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
+.sidebar-stats{
+  margin:12px 20px 0;padding:12px;background:var(--bg);
+  border-radius:8px;font-size:12px;color:var(--text-muted);
+}
+.sidebar-stats strong{color:var(--primary);font-size:20px;display:block}
+.sidebar-title{
+  padding:0 20px 10px;font-size:11px;font-weight:700;
+  letter-spacing:.06em;color:var(--text-light);margin-top:16px;
+}
+.sidebar ul{list-style:none}
+.sidebar ul li a{
+  display:block;padding:9px 20px;color:var(--text-muted);
+  text-decoration:none;font-size:13.5px;border-left:3px solid transparent;
+  transition:all .15s;line-height:1.4;
+}
+.sidebar ul li a:hover{color:var(--primary);background:var(--primary-light)}
+.sidebar ul li a.active{
+  color:var(--primary);background:var(--primary-light);
+  border-left-color:var(--primary);font-weight:600;
+}
+.main-content{
+  margin-left:var(--sidebar-w);
+  padding-top:calc(var(--header-h)+40px);
+  padding-bottom:80px;padding-left:40px;padding-right:40px;
+  max-width:calc(var(--sidebar-w)+860px);
+  min-width:0;
+}
+.faq-section{margin-bottom:44px;scroll-margin-top:calc(var(--header-h)+16px)}
+.faq-section:first-of-type{margin-top:8px}
+.section-title{
+  font-size:19px;font-weight:700;color:var(--text);
+  padding:14px 20px;background:linear-gradient(135deg,var(--primary-light),#ede9fe);
+  border-radius:var(--radius);border-left:4px solid var(--primary);
+  margin-bottom:14px;display:flex;align-items:center;gap:10px;
+}
+.qa-card{
+  background:var(--surface);border:1.5px solid var(--border);
+  border-radius:var(--radius);margin-bottom:11px;overflow:hidden;
+  transition:border-color .2s,box-shadow .2s;
+}
+.qa-card:hover{border-color:#bfdbfe;box-shadow:var(--shadow-hover)}
+.qa-card.open{border-color:var(--primary)}
+.qa-card.hidden{display:none!important}
+.qa-card.highlight{border-color:#f59e0b;background:#fffbeb}
+.qa-question{
+  display:flex;align-items:flex-start;gap:12px;padding:14px 20px;
+  cursor:pointer;user-select:none;transition:background .15s;
+}
+.qa-question:hover{background:#f8fafc}
+.qa-card.open .qa-question{background:var(--primary-light)}
+.q-num{
+  flex-shrink:0;background:var(--primary);color:#fff;
+  font-size:11px;font-weight:700;padding:2px 8px;
+  border-radius:20px;margin-top:2px;
+}
+.q-text{
+  flex:1;font-size:15px;font-weight:600;color:var(--text);line-height:1.5;
+}
+.q-toggle{
+  flex-shrink:0;color:var(--text-light);font-size:12px;
+  transition:transform .25s;margin-top:4px;
+}
+.qa-card.open .q-toggle{transform:rotate(180deg)}
+
+/* ===== 展开/折叠：用 grid template-rows 替代 max-height hack ===== */
+.qa-answer{
+  display:grid;
+  grid-template-rows:0fr;
+  transition:grid-template-rows .35s ease;
+}
+.qa-card.open .qa-answer{
+  grid-template-rows:1fr;
+}
+.qa-answer > .answer-inner{
+  overflow:hidden;
+}
+
+.answer-inner{padding:18px 22px 22px;border-top:1px solid var(--border)}
+.answer-inner p{margin-bottom:7px;color:var(--text);line-height:1.8}
+.answer-inner p:last-child{margin-bottom:0}
+.sub-step{font-weight:600;color:var(--primary-dark);margin-top:11px!important}
+.numbered-step{padding-left:4px;border-left:3px solid var(--primary-light);padding-left:12px}
+.bullet-item{padding-left:8px;color:var(--text-muted)}
+.path-tag{
+  display:inline-block;background:#eff6ff;color:var(--primary-dark);
+  border:1px solid #bfdbfe;border-radius:4px;padding:1px 6px;
+  font-size:13px;font-weight:500;
+}
+.answer-inner a{
+  color:var(--primary);text-decoration:none;border-bottom:1px dashed var(--primary);
+}
+.answer-inner a:hover{border-bottom-style:solid}
+
+/* ===== 图片容器：固定宽高比防止布局抖动 ===== */
+.img-wrap{
+  margin:14px 0;border-radius:8px;overflow:hidden;
+  border:1px solid var(--border);box-shadow:var(--shadow);
+  background:#f1f5f9;text-align:center;
+  position:relative;
+  min-height:120px;
+}
+.img-wrap img{
+  max-width:100%;height:auto;display:block;cursor:zoom-in;
+  transition:opacity .3s;
+  opacity:0;
+}
+.img-wrap img.loaded{opacity:1}
+.img-wrap img:hover{opacity:.88}
+.img-wrap::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,#f1f5f9 25%,#e2e8f0 25%,#e2e8f0 50%,#f1f5f9 50%,#f1f5f9 75%,#e2e8f0 75%);
+  background-size:20px 20px;z-index:0;
+  animation:shimmer 1.5s infinite linear;
+  opacity:.5;
+}
+.img-wrap img.loaded + ::after{display:none}
+@keyframes shimmers{0%{background-position:0 0}100%{background-position:40px 40px}}
+
+.search-hl{background:#fef08a;border-radius:2px;padding:0 1px}
+#noResult{
+  display:none;text-align:center;padding:70px 24px;color:var(--text-muted);
+}
+.no-icon{font-size:44px;margin-bottom:10px}
+.lb-overlay{
+  display:none;position:fixed;top:0;left:0;right:0;bottom:0;
+  background:rgba(0,0,0,.92);z-index:9999;
+  justify-content:center;align-items:center;cursor:zoom-out;
+  animation:lbFadeIn .2s ease;
+}
+.lb-overlay.active{display:flex}
+@keyframes lbFadeIn{from{opacity:0}to{opacity:1}}
+.lb-overlay img{
+  max-width:95vw;max-height:92vh;object-fit:contain;
+  border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+.lb-close{
+  position:fixed;top:18px;right:24px;width:42px;height:42px;
+  background:rgba(255,255,255,.15);border:none;border-radius:50%;
+  color:#fff;font-size:21px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .15s;
+}
+.lb-close:hover{background:rgba(255,255,255,.3)}
+.lb-hint{
+  position:fixed;bottom:22px;left:50%;transform:translateX(-50%);
+  color:rgba(255,255,255,.5);font-size:13px;
+}
+#backTop{
+  position:fixed;right:26px;bottom:28px;width:42px;height:42px;
+  background:var(--primary);color:#fff;border:none;border-radius:50%;
+  font-size:19px;cursor:pointer;display:flex;align-items:center;
+  justify-content:center;
+  box-shadow:0 4px 14px rgba(37,99,235,.4);
+  opacity:0;transform:translateY(8px);transition:all .25s;z-index:200;
+}
+#backTop.visible{opacity:1;transform:translateY(0)}
+#backTop:hover{background:var(--primary-dark)}
+
+@media(max-width:768px){
+  :root{--sidebar-w:0}
+  .sidebar{display:none}
+  .main-content{padding-left:16px;padding-right:16px}
+  .top-header{padding:0 14px}
+  .header-actions{display:none}
+}
+@media print{
+  .top-header,.sidebar,#backTop,.lb-overlay{display:none!important}
+  .main-content{margin:0;padding:0}
+  .qa-answer{display:block!important}
+}
+</style>
+</head>
+<body>
+
+<header class="top-header">
+  <div class="header-logo"><div class="logo-icon">HR</div>新 HRMS 系统 FAQ</div>
+  <div class="header-divider"></div>
+  <div class="search-wrap">
+    <span class="search-icon">&#128269;</span>
+    <input type="text" id="searchInput" placeholder="搜索问题或关键词&#8230;"
+      oninput="searchFAQ()" onkeydown="if(event.key==='Escape')clearSearch()">
+    <span class="search-clear" id="searchClear" onclick="clearSearch()">&#10005;</span>
+  </div>
+  <span id="resultBadge"></span>
+  <div class="header-actions">
+    <button class="btn-ghost" onclick="expandAll()">展开全部</button>
+    <button class="btn-ghost" onclick="collapseAll()">折叠全部</button>
+  </div>
+</header>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-stats"><strong>33</strong><br>个常见问题<br>5个分类</div>
+  <div class="sidebar-title">分类导航</div><ul><li><a href="#section-0" onclick="navClick(this)">一、系统登录与路径</a></li>
+<li><a href="#section-1" onclick="navClick(this)">二、编制管理</a></li>
+<li><a href="#section-2" onclick="navClick(this)">三、招聘需求</a></li>
+<li><a href="#section-3" onclick="navClick(this)">四、Offer 管理</a></li>
+<li><a href="#section-4" onclick="navClick(this)">五、预算管理</a></li></ul>
+</nav>
+
+<main class="main-content" id="mainContent">
+<div id="noResult"><div class="no-icon">&#128269;</div><p>未找到匹配的问题</p></div>
+    <section class="faq-section" id="section-0">
+      <h2 class="section-title">一、系统登录与路径</h2>
+
+      <div class="qa-card" id="qa-0"
+           data-q="Q1 如何登录新HRMS系统？"
+           data-section="一、系统登录与路径">
+        <div class="qa-question" onclick="toggleQA(0)">
+          <span class="q-num">Q1</span>
+          <span class="q-text">如何登录新HRMS系统？</span>
+          <span class="q-toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer" id="ans-0">
+          <div class="answer-inner">
+<p>支持两种方式登录：</p>
+<p class="sub-step">▸ 网址登录</p>
+<p>在浏览器中直接访问 <a href="https://hrms.igofoex.com/hc/index" target="_blank" rel="noopener">https://hrms.igofoex.com/hc/index</a></p>
+<p class="sub-step">▸ 飞书登录</p>
+<p>打开飞书工作台 → 找到「HRMS（新）」应用入口 → 点击进入系统</p>
+<div class="img-wrap"><img src="images/img_000.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="faq-section" id="section-1">
+      <h2 class="section-title">二、编制管理</h2>
+
+      <div class="qa-card" id="qa-1"
+           data-q="Q1 如何查看编制明细？支持哪些视图？"
+           data-section="二、编制管理">
+        <div class="qa-question" onclick="toggleQA(1)">
+          <span class="q-num">Q1</span>
+          <span class="q-text">如何查看编制明细？支持哪些视图？</span>
+          <span class="q-toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer" id="ans-1">
+          <div class="answer-inner">
+<p>操作路径：<span class="path-tag">【编制管理】</span>→<span class="path-tag">【编制明细】</span></p>
+<p>系统提供三种视图，可按需切换：</p>
+<p class="numbered-step">① 列表视图 — 以列表形式展示所有编制明细，支持绑定员工、移除员工、更新编制等操作</p>
+<p class="numbered-step">② 职位视图 — 按职位、职级、ABC分类相同的编制进行汇总显示</p>
+<p class="numbered-step">③ 空编员工视图 — 汇总显示国内及海外未绑定编制的员工，可在此快速为员工绑定编制</p>
+<div class="img-wrap"><img src="images/img_001.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_002.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_003.png" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_004.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="qa-card" id="qa-2"
+           data-q="Q2 如何将员工绑定到编制？"
+           data-section="二、编制管理">
+        <div class="qa-question" onclick="toggleQA(2)">
+          <span class="q-num">Q2</span>
+          <span class="q-text">如何将员工绑定到编制？</span>
+          <span class="q-toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer" id="ans-2">
+          <div class="answer-inner">
+<p>提供两种绑定方式：</p>
+<p class="sub-step">▸ 列表视图绑定</p>
+<p><span class="path-tag">【编制明细】</span>→<span class="path-tag">【列表视图】</span>→ 点击目标编制的「更多」→「绑定员工」</p>
+<p>● 只能选择当前编制部门下的员工，不支持跨部门绑定</p>
+<p class="sub-step">▸ 空编员工绑定</p>
+<p><span class="path-tag">【编制明细】</span>→<span class="path-tag">【空编员工】</span>→ 搜索员工 → 点击「绑定编制」→ 选择对应编制确认</p>
+<div class="img-wrap"><img src="images/img_005.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_006.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_007.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="qa-card" id="qa-3"
+           data-q="Q3 如何解除编制与员工的绑定？"
+           data-section="二、编制管理">
+        <div class="qa-question" onclick="toggleQA(3)">
+          <span class="q-num">Q3</span>
+          <span class="q-text">如何解除编制与员工的绑定？</span>
+          <span class="q-toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer" id="ans-3">
+          <div class="answer-inner">
+<p>操作路径：<span class="path-tag">【编制明细】</span>→<span class="path-tag">【列表视图】</span>→ 点击目标编制的「更多」→「移除员工」→ 确认即可。</p>
+<p>国内编制与海外编制操作方式相同。</p>
+<div class="img-wrap"><img src="images/img_008.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_009.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="qa-card" id="qa-4"
+           data-q="Q4 如何更新编制信息？更新后需要审批吗？"
+           data-section="二、编制管理">
+        <div class="qa-question" onclick="toggleQA(4)">
+          <span class="q-num">Q4</span>
+          <span class="q-text">如何更新编制信息？更新后需要审批吗？</span>
+          <span class="q-toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer" id="ans-4">
+          <div class="answer-inner">
+<p>操作路径：<span class="path-tag">【编制明细】</span>→<span class="path-tag">【列表视图】</span>→ 点击目标编制的「更新」→ 编辑属性信息 → 确认。</p>
+<p>可编辑的属性包括：一级成本中心、编制工作地点等。</p>
+<p>● 此操作不属于部门内编制变动，仅是对编制属性的完善和调整</p>
+<p>● 确认后直接生效，无需审批</p>
+<div class="img-wrap"><img src="images/img_010.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_011.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="qa-card" id="qa-5"
+           data-q="Q5 什么是浮动编制？如何新增和取消？"
+           data-section="二、编制管理">
+        <div class="qa-question" onclick="toggleQA(5)">
+          <span class="q-num">Q5</span>
+          <span class="q-text">什么是浮动编制？如何新增和取消？</span>
+          <span class="q-toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer" id="ans-5">
+          <div class="answer-inner">
+<p>浮动编制适用于「赛马机制」场景：一个编制招聘多人进行试用，最后择优转正录取。</p>
+<p class="sub-step">▸ 新增操作</p>
+<p><span class="path-tag">【编制明细】</span>→<span class="path-tag">【列表视图】</span>→ 点击「新增浮动编制」→ 填写新增数量和浮动到期日期 → 确认</p>
+<p class="sub-step">▸ 取消操作</p>
+<p>在对应浮动编制的操作中点击「停用浮动编制」即可</p>
+<div class="img-wrap"><img src="images/img_012.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_013.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_014.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_015.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="qa-card" id="qa-6"
+           data-q="Q6 编制调整包含哪些操作？调整流程是什么？"
+           data-section="二、编制管理">
+        <div class="qa-question" onclick="toggleQA(6)">
+          <span class="q-num">Q6</span>
+          <span class="q-text">编制调整包含哪些操作？调整流程是什么？</span>
+          <span class="q-toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer" id="ans-6">
+          <div class="answer-inner">
+<p>编制调整包含三类操作：增编、减编、调编。调整分三步进行：</p>
+<p>第一步：编制调整</p>
+<p>● 增编（全新编制）：点击「新建编制」填写信息确认</p>
+<p>● 增编（已有编制扩编）：点击编制上的「编制」按钮，填写扩编信息</p>
+<p>● 减编：点击「减编」缩减编制</p>
+<p>● 调编：变更ABC分类、职级、成本中心、工作地点等属性</p>
+<p class="bullet-item">▶ 提示：错增/误操作可点击「撤销」恢复。未提交审批前，所有操作仅存在方案中，不影响当前生效编制</p>
+<p>第二步：编制人员调整</p>
+<p>存在停用的在职编制时，相关人员需重新确认绑定编制 → 点击「绑定编制」</p>
+<p>第三步：发起申请</p>
+<p>确认调整和人员绑定无误后，在编制调整方案页核对明细，确认后提交审批</p>
+<div class="img-wrap"><img src="images/img_016.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_017.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_018.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_019.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_020.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_021.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_022.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_023.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_024.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_025.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_026.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_027.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="qa-card" id="qa-7"
+           data-q="Q7 什么是浮动员工？如何设置和取消？"
+           data-section="二、编制管理">
+        <div class="qa-question" onclick="toggleQA(7)">
+          <span class="q-num">Q7</span>
+          <span class="q-text">什么是浮动员工？如何设置和取消？</span>
+          <span class="q-toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer" id="ans-7">
+          <div class="answer-inner">
+<p>浮动员工适用于待调整编制或待离职人员场景：将员工设为浮动员工后，其编制可释放用于招聘。</p>
+<p>● 设置条件：编制状态为「生效」、在岗状态为「在职」、且没有浮动人员</p>
+<p class="sub-step">▸ 设置：在编制明细中 → 点击「设为浮动员工」→ 设定浮动到期日</p>
+<p>浮动期间编制可用于招聘或调动；到期后若员工未发起调动/离职，编制将释放为空编</p>
+<p class="sub-step">▸ 取消：浮动未到期的编制支持取消</p>
+<p>● 在岗状态为「在岗」/「在途」→ 清空后员工进入空编员工列表</p>
+<p>● 在岗状态为「空编」→ 清空后编制恢复为在岗状态</p>
+<div class="img-wrap"><img src="images/img_028.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_029.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_030.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="qa-card" id="qa-8"
+           data-q="Q8 如何批量导入编制？"
+           data-section="二、编制管理">
+        <div class="qa-question" onclick="toggleQA(8)">
+          <span class="q-num">Q8</span>
+          <span class="q-text">如何批量导入编制？</span>
+          <span class="q-toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer" id="ans-8">
+          <div class="answer-inner">
+<p>适用于年度大批量编制调整需求。</p>
+<p>操作路径：<span class="path-tag">【编制管理】</span>→<span class="path-tag">【编制调整】</span>→<span class="path-tag">【批量调整申请】</span>→ 点击「导入编制」</p>
+<p>步骤：</p>
+<p class="numbered-step">① 选择需调整的部门 → 下载模板（可选含编制明细或空白模板）</p>
+<p class="numbered-step">② 按模板填写调整内容（变动列填：调编 / 增编 / 减编）</p>
+<p class="numbered-step">③ 上传填好的表格，系统自动校验</p>
+<p class="numbered-step">④ 校验通过后关闭导入视图，在编制调整视图核对明细，确认后提交审批</p>
+<p class="bullet-item">▶ 重要：一次编制调整支持多次导入，每次导入会覆盖前一次的全部数据，请确认最后一次导入为最终正确版本</p>
+<div class="img-wrap"><img src="images/img_031.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_032.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_033.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_034.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="qa-card" id="qa-9"
+           data-q="Q9 编制导入模板怎么填写？有哪些注意事项？"
+           data-section="二、编制管理">
+        <div class="qa-question" onclick="toggleQA(9)">
+          <span class="q-num">Q9</span>
+          <span class="q-text">编制导入模板怎么填写？有哪些注意事项？</span>
+          <span class="q-toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer" id="ans-9">
+          <div class="answer-inner">
+<p>填写要点：</p>
+<p class="numbered-step">① 变动列：填写调编、增编或减编，不调整的行不用填</p>
+<p class="numbered-step">② 必填字段（红色带*号）：调编及减编时「编制编码」必填；增编时无需填写</p>
+<p class="numbered-step">③ 调编时可调整：编制职级、ABC分类、工作地点；编制状态为「空编」且未关联招聘需求时，还可调整编制职位</p>
+<p class="numbered-step">④ 增编时无需填写编制编码</p>
+<p class="numbered-step">⑤ 减编时支持将在岗人员清空解绑</p>
+<p class="numbered-step">⑥ 参考数据：职位库、办公地址、工作地点可供选择参考</p>
+<div class="img-wrap"><img src="images/img_035.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_036.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_037.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_038.png" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_039.png" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="qa-card" id="qa-10"
+           data-q="Q10 导入校验失败了怎么办？"
+           data-section="二、编制管理">
+        <div class="qa-question" onclick="toggleQA(10)">
+          <span class="q-num">Q10</span>
+          <span class="q-text">导入校验失败了怎么办？</span>
+          <span class="q-toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer" id="ans-10">
+          <div class="answer-inner">
+<p>若存在校验失败的编制，可点击页面提示位置下载错误记录文件。</p>
+<p>处理步骤：</p>
+<p class="numbered-step">① 打开错误记录文件，首列会自动显示错误提示信息</p>
+<p class="numbered-step">② 根据提示调整对应的编制明细</p>
+<p class="numbered-step">③ 调整完毕后，右键删除错误记录列</p>
+<p class="numbered-step">④ 将删除错误列后的模板重新导入编制调整即可</p>
+<div class="img-wrap"><img src="images/img_040.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_041.png" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_042.png" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_043.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_044.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="qa-card" id="qa-11"
+           data-q="Q11 如何管理兼职员工的编制？"
+           data-section="二、编制管理">
+        <div class="qa-question" onclick="toggleQA(11)">
+          <span class="q-num">Q11</span>
+          <span class="q-text">如何管理兼职员工的编制？</span>
+          <span class="q-toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer" id="ans-11">
+          <div class="answer-inner">
+<p>兼职员工编制管理可实现兼职人员线上占编，确保「满编率」等数据报表由系统自动统计，替代原人工线下核算。</p>
+<p class="sub-step">▸ 绑定兼职员工：<span class="path-tag">【编制明细】</span>→ 目标编制 →「绑定兼职员工」→ 选择兼职员工确认</p>
+<p class="sub-step">▸ 批量绑定：<span class="path-tag">【编制明细】</span>→「批量导入兼职员工」→ 下载模板并上传</p>
+<p class="sub-step">▸ 移除兼职员工：<span class="path-tag">【编制明细】</span>→ 目标编制 →「移除兼职员工」</p>
+<p class="sub-step">▸ 批量解绑：勾选多个目标编制 → 点击列表右上角「批量移除兼职员工」</p>
+<div class="img-wrap"><img src="images/img_045.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_046.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_047.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_048.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_049.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_050.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_051.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_052.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="faq-section" id="section-2">
+      <h2 class="section-title">三、招聘需求</h2>
+
+      <div class="qa-card" id="qa-12"
+           data-q="Q1 如何发起招聘需求？"
+           data-section="三、招聘需求">
+        <div class="qa-question" onclick="toggleQA(12)">
+          <span class="q-num">Q1</span>
+          <span class="q-text">如何发起招聘需求？</span>
+          <span class="q-toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer" id="ans-12">
+          <div class="answer-inner">
+<p>操作路径：<span class="path-tag">【招聘管理】</span>→<span class="path-tag">【招聘需求】</span></p>
+<p class="sub-step">▸ 方式一：点击「新建需求」→ 选择对应部门的可用编制 → 完成需求单内容填写</p>
+<p class="sub-step">▸ 方式二：在<span class="path-tag">【编制明细】</span>中，找到目标编制直接点击「发起招聘」→ 完成需求单填写</p>
+<div class="img-wrap"><img src="images/img_053.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_054.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_055.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_056.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="qa-card" id="qa-13"
+           data-q="Q2 如何对在岗编制（即将离职人员）提前发起招聘？"
+           data-section="三、招聘需求">
+        <div class="qa-question" onclick="toggleQA(13)">
+          <span class="q-num">Q2</span>
+          <span class="q-text">如何对在岗编制（即将离职人员）提前发起招聘？</span>
+          <span class="q-toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer" id="ans-13">
+          <div class="answer-inner">
+<p>适用场景：对即将离职人员的编制提前发起招聘，避免招聘空窗期。</p>
+<p>步骤：</p>
+<p class="numbered-step">① 在编制明细中搜索目标编制 → 点击「更多操作」→「设为浮动员工」</p>
+<p class="numbered-step">② 设为浮动员工后，在岗人员移至浮动员工处</p>
+<p class="numbered-step">③ 正常发起招聘即可</p>
+<p>● 浮动期间员工发起调动/离职且生效后，浮动员工自动移出并绑定新编制</p>
+<p>● 若调动/离职被驳回，员工依然保持浮动状态</p>
+<p>● 浮动期间该编制被减编，浮动员工变为空编</p>
+<div class="img-wrap"><img src="images/img_057.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_058.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="qa-card" id="qa-14"
+           data-q="Q3 国内招聘需求如何在EHR中编辑和发起审批？"
+           data-section="三、招聘需求">
+        <div class="qa-question" onclick="toggleQA(14)">
+          <span class="q-num">Q3</span>
+          <span class="q-text">国内招聘需求如何在EHR中编辑和发起审批？</span>
+          <span class="q-toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer" id="ans-14">
+          <div class="answer-inner">
+<p>HRMS点击发起招聘需求后，EHR会生成一条需求状态为「草稿」的招聘需求单。</p>
+<p>操作路径：飞书工作台 → EHR → 招聘管理系统 → 招聘需求</p>
+<p class="sub-step">▸ 编辑：点击「需求名称」进入需求详情页 → 点击右上角「编辑」→ 编辑完成后保存</p>
+<p class="sub-step">▸ 发起审批：保存后点击页面右上角「发起审批」按钮即可</p>
+<div class="img-wrap"><img src="images/img_059.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_060.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_061.png" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="qa-card" id="qa-15"
+           data-q="Q4 如何关闭或暂停招聘需求？"
+           data-section="三、招聘需求">
+        <div class="qa-question" onclick="toggleQA(15)">
+          <span class="q-num">Q4</span>
+          <span class="q-text">如何关闭或暂停招聘需求？</span>
+          <span class="q-toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer" id="ans-15">
+          <div class="answer-inner">
+<p class="sub-step">▸ 关闭需求：关闭当前招聘需求，不再进行招聘</p>
+<p>● 后期如需再招聘，需要重新发起流程</p>
+<p class="sub-step">▸ 暂停需求：暂停当前招聘</p>
+<p>● 后期启动招聘无需重新走流程，但需要在系统中手动「启动需求」</p>
+<div class="img-wrap"><img src="images/img_062.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="qa-card" id="qa-16"
+           data-q="Q5 如何减少招聘需求人数？"
+           data-section="三、招聘需求">
+        <div class="qa-question" onclick="toggleQA(16)">
+          <span class="q-num">Q5</span>
+          <span class="q-text">如何减少招聘需求人数？</span>
+          <span class="q-toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer" id="ans-16">
+          <div class="answer-inner">
+<p>一个招聘需求流程可申请招聘多人。若根据业务需要减少招聘人数，在招聘需求操作中使用「减少需求人数」功能即可。</p>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="qa-card" id="qa-17"
+           data-q="Q6 如何转交招聘需求给其他人？"
+           data-section="三、招聘需求">
+        <div class="qa-question" onclick="toggleQA(17)">
+          <span class="q-num">Q6</span>
+          <span class="q-text">如何转交招聘需求给其他人？</span>
+          <span class="q-toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer" id="ans-17">
+          <div class="answer-inner">
+<p>当招聘人员离职或异动，需要将需求转办给其他人时：勾选目标需求 → 选择「转交需求」→ 选择要转交的人员即可。</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="faq-section" id="section-3">
+      <h2 class="section-title">四、Offer 管理</h2>
+
+      <div class="qa-card" id="qa-18"
+           data-q="Q1 如何发起Offer审批流程？"
+           data-section="四、Offer 管理">
+        <div class="qa-question" onclick="toggleQA(18)">
+          <span class="q-num">Q1</span>
+          <span class="q-text">如何发起Offer审批流程？</span>
+          <span class="q-toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer" id="ans-18">
+          <div class="answer-inner">
+<p>操作路径：<span class="path-tag">【招聘管理】</span>→<span class="path-tag">【Offer管理】</span></p>
+<p class="sub-step">▸ 方式一：点击「新建Offer」→ 选择新建海外Offer（海外编制）或新建国内Offer（国内编制）</p>
+<p class="sub-step">▸ 方式二：在<span class="path-tag">【招聘需求】</span>中，点击目标需求的「新建Offer」按钮</p>
+<p>● 蓝色图标：可以发起Offer</p>
+<p>● 灰色图标：不可再发起Offer</p>
+<div class="img-wrap"><img src="images/img_063.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_064.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_065.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="qa-card" id="qa-19"
+           data-q="Q2 国内Offer和海外Offer的发起有什么区别？"
+           data-section="四、Offer 管理">
+        <div class="qa-question" onclick="toggleQA(19)">
+          <span class="q-num">Q2</span>
+          <span class="q-text">国内Offer和海外Offer的发起有什么区别？</span>
+          <span class="q-toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer" id="ans-19">
+          <div class="answer-inner">
+<p class="sub-step">▸ 海外Offer</p>
+<p>在HRMS中直接发起审批流程，审批通过后默认状态为「已接受Offer」</p>
+<p class="sub-step">▸ 国内Offer</p>
+<p>HRMS点击发起后，需进入北森EHR系统完成后续操作：</p>
+<p>飞书工作台 → EHR → 招聘管理系统 → 对应应聘者详情页 → 点击「新建Offer」→ 编辑完成后提交审批</p>
+<div class="img-wrap"><img src="images/img_066.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_067.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="qa-card" id="qa-20"
+           data-q="Q3 Offer有哪些状态？各代表什么含义？"
+           data-section="四、Offer 管理">
+        <div class="qa-question" onclick="toggleQA(20)">
+          <span class="q-num">Q3</span>
+          <span class="q-text">Offer有哪些状态？各代表什么含义？</span>
+          <span class="q-toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer" id="ans-20">
+          <div class="answer-inner">
+<p class="sub-step">▸ 作废 — 作废当前Offer申请流程</p>
+<p>● 国内Offer因流程在北森EHR中，暂不支持在HRMS直接作废</p>
+<p class="sub-step">▸ 待发Offer — 国内EHR中Offer流程完成审批，等待发送Offer邮件</p>
+<p class="sub-step">▸ 已发Offer — 国内EHR中已发送Offer邮件</p>
+<p class="sub-step">▸ 已接受Offer — 海外Offer审批通过后默认状态；国内指候选人实际接受Offer</p>
+<p>● 已接受Offer的候选人均为待入职状态</p>
+<p class="sub-step">▸ 放弃入职 — 点击后同步到OEHR系统入职管理，显示入职状态为「取消入职」</p>
+<p>● 国内Offer因流程在北森EHR，暂不支持在HRMS直接处理</p>
+<div class="img-wrap"><img src="images/img_068.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="faq-section" id="section-4">
+      <h2 class="section-title">五、预算管理</h2>
+
+      <div class="qa-card" id="qa-21"
+           data-q="Q1 预算管理的整体流程是什么？"
+           data-section="五、预算管理">
+        <div class="qa-question" onclick="toggleQA(21)">
+          <span class="q-num">Q1</span>
+          <span class="q-text">预算管理的整体流程是什么？</span>
+          <span class="q-toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer" id="ans-21">
+          <div class="answer-inner">
+<p>预算管理分为五个步骤：</p>
+<p>第一步（HCOE）：新增预算任务</p>
+<p>界定预算人员范围、指定各组织预算任务负责人、配置关联查看权限</p>
+<p>第二步（TD条线BP）：维护最新的组织和编制</p>
+<p>前往EHR维护组织架构，在编制管理中进行编制批量调整</p>
+<p>第三步（TR条线BP及HCOE）：检查预算配置数据</p>
+<p>核对人力成本预算科目及方案、维护海外/国内薪酬中位值、维护非人力成本预算、维护TMT成员人力成本预算</p>
+<p>第四步（TR条线BP）：预算测算和调整</p>
+<p>在「预算方案」中进行测算和编制微调，下载预算明细进行核对</p>
+<p>第五步（TR条线BP）：线下评审及提交</p>
+<p>线下预算方案评审通过后，线上提交「预算方案」归档</p>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="qa-card" id="qa-22"
+           data-q="Q2 如何创建预算任务？"
+           data-section="五、预算管理">
+        <div class="qa-question" onclick="toggleQA(22)">
+          <span class="q-num">Q2</span>
+          <span class="q-text">如何创建预算任务？</span>
+          <span class="q-toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer" id="ans-22">
+          <div class="answer-inner">
+<p>操作路径：<span class="path-tag">【预算管理】</span>→<span class="path-tag">【预算任务】</span>→ 点击「新增任务」→ 填写任务信息确认。</p>
+<p>核心字段说明：</p>
+<p class="sub-step">▸ 关联查看组织：A需要看到B部门的预算，则A的预算任务需将B部门设为关联组织</p>
+<p class="sub-step">▸ 预算负责人：因薪酬数据敏感性，仅任务负责人可看到预算方案并进行调整</p>
+<p>任务创建后状态为「草稿」，点击「启动任务」后任务负责人可在预算方案中进行测算。</p>
+<div class="img-wrap"><img src="images/img_069.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_070.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_071.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="qa-card" id="qa-23"
+           data-q="Q3 预算任务有哪些状态？各状态下可以做什么？"
+           data-section="五、预算管理">
+        <div class="qa-question" onclick="toggleQA(23)">
+          <span class="q-num">Q3</span>
+          <span class="q-text">预算任务有哪些状态？各状态下可以做什么？</span>
+          <span class="q-toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer" id="ans-23">
+          <div class="answer-inner">
+<p>预算方案的状态流转：</p>
+<p class="sub-step">▸ 草稿 — 启动预算任务后进入，可进行预算方案的编辑</p>
+<p class="sub-step">▸ 审批中 — 提交预算方案后进入，仅可查看预算方案和OA流程</p>
+<p class="sub-step">▸ 生效中 — 预算方案审批通过后进入，可查看预算方案和OA流程</p>
+<p class="sub-step">▸ 已归档 — 到达新的预算年份后自动归档</p>
+<p class="sub-step">▸ 已废弃 — OA审批不通过</p>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="qa-card" id="qa-24"
+           data-q="Q4 谁可以看到预算方案？如何进行预算测算？"
+           data-section="五、预算管理">
+        <div class="qa-question" onclick="toggleQA(24)">
+          <span class="q-num">Q4</span>
+          <span class="q-text">谁可以看到预算方案？如何进行预算测算？</span>
+          <span class="q-toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer" id="ans-24">
+          <div class="answer-inner">
+<p>权限说明：因薪酬隐私数据保护，仅预算任务负责人可看到对应部门的预算方案。</p>
+<p>例如：张三为A部门任务负责人，则张三仅能看到A部门的预算方案。</p>
+<p>测算步骤：</p>
+<p class="numbered-step">① 点击「预算方案」下的「测算」按钮</p>
+<p class="bullet-item">▶ 建议每次进入页面都点击测算，系统会获取最新生效的组织、编制及在职人员</p>
+<p class="numbered-step">② 测算中不可操作，等待完成</p>
+<p class="numbered-step">③ 测算完成后点击「查看详情」进入详情页查看结果</p>
+<div class="img-wrap"><img src="images/img_072.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_073.png" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_074.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_075.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_076.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_077.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="qa-card" id="qa-25"
+           data-q="Q5 如何导入奖金/提成？奖金是如何分配的？"
+           data-section="五、预算管理">
+        <div class="qa-question" onclick="toggleQA(25)">
+          <span class="q-num">Q5</span>
+          <span class="q-text">如何导入奖金/提成？奖金是如何分配的？</span>
+          <span class="q-toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer" id="ans-25">
+          <div class="answer-inner">
+<p>操作：点击「导入奖金/提成」→ 下载导入模板 → 按「部门+职族/职类」填写奖金总额 → 上传导入。</p>
+<p>导入后需再次点击测算才能看到最新明细。</p>
+<p>必填规则：</p>
+<p>● 仅按部门分配：只填到部门即可</p>
+<p>● 按部门+职族+职类分配：三者均必填，不允许部分填写</p>
+<p>分配规则：系统根据填写的部门/职族/职类及奖金总额，匹配符合条件的存量和增量员工，分摊到每人每月。</p>
+<p>覆盖规则：同一部门重复导入时，后一次的分配会覆盖前一次。</p>
+<p>例如：先按「财务部」导入36万分配给张三、李四、王五，再按「财务部+专业族+财务类」导入36万仅分配给张三，则李四和王五的奖金明细清空为0。</p>
+<div class="img-wrap"><img src="images/img_078.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_079.png" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="qa-card" id="qa-26"
+           data-q="Q6 预算方案中的编制调整和编制管理中的编制调整有什么区别？"
+           data-section="五、预算管理">
+        <div class="qa-question" onclick="toggleQA(26)">
+          <span class="q-num">Q6</span>
+          <span class="q-text">预算方案中的编制调整和编制管理中的编制调整有什么区别？</span>
+          <span class="q-toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer" id="ans-26">
+          <div class="answer-inner">
+<p class="sub-step">▸ 编制管理下的编制调整</p>
+<p>● 适用于组织规划期间的大规模编制调整</p>
+<p>● 适用于日常编制调整，需快速走审批</p>
+<p>● 审批通过的编制才会进入预算测算范围</p>
+<p class="sub-step">▸ 预算方案中的编制调整</p>
+<p>● 在预算测算后，用于模拟增编/减编对预算的影响</p>
+<p>● 草稿态的编制也会进入测算范围（无需等审批）</p>
+<p>● 调整完成后点击「确认并重新进行测算」即可看到最新结果</p>
+<div class="img-wrap"><img src="images/img_080.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_081.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="qa-card" id="qa-27"
+           data-q="Q7 什么情况下需要点击「预算测算」？"
+           data-section="五、预算管理">
+        <div class="qa-question" onclick="toggleQA(27)">
+          <span class="q-num">Q7</span>
+          <span class="q-text">什么情况下需要点击「预算测算」？</span>
+          <span class="q-toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer" id="ans-27">
+          <div class="answer-inner">
+<p>建议每次进入预算方案页面都点击「预算测算」，系统会获取最新的生效组织和编制数据以及当前在职人员信息进行计算。</p>
+<p>必须点击测算的场景：</p>
+<p>● 导入奖金/提成后</p>
+<p>● 进行编制调整后</p>
+<p>● 组织架构或人员发生变化后</p>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="qa-card" id="qa-28"
+           data-q="Q8 如何提交预算方案？提交有什么前置条件？"
+           data-section="五、预算管理">
+        <div class="qa-question" onclick="toggleQA(28)">
+          <span class="q-num">Q8</span>
+          <span class="q-text">如何提交预算方案？提交有什么前置条件？</span>
+          <span class="q-toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer" id="ans-28">
+          <div class="answer-inner">
+<p>前置条件（必须全部完成）：</p>
+<p class="numbered-step">① 非人力成本预算维护完成</p>
+<p class="numbered-step">② TMT成员人力成本预算维护完成</p>
+<p>提交操作：点击「提交与统计」下的「提交」按钮即可。</p>
+<p>审批规则：当一个成本中心下所有组织的任务负责人都提交后，预算方案才会进入OA审批流程。</p>
+<div class="img-wrap"><img src="images/img_082.png" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="qa-card" id="qa-29"
+           data-q="Q9 如何导入非人力成本预算？"
+           data-section="五、预算管理">
+        <div class="qa-question" onclick="toggleQA(29)">
+          <span class="q-num">Q9</span>
+          <span class="q-text">如何导入非人力成本预算？</span>
+          <span class="q-toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer" id="ans-29">
+          <div class="answer-inner">
+<p>操作路径：<span class="path-tag">【预算管理】</span>→<span class="path-tag">【非人力成本预算】</span>→ 下载模板填写后导入。</p>
+<p>字段包括：成本中心名称（必填）、二级部门名称（必填）、三级部门名称（选填）、文化费用、招聘费用、活动费用、行政费用、其他费用、合计（全部为必填整数，单位为元）。</p>
+<p>● 所有数据校验通过才会导入成功</p>
+<p>● 若校验失败，下载错误文件调整后，删除错误信息列即可直接重新导入</p>
+<div class="img-wrap"><img src="images/img_083.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_084.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_085.png" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_086.png" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="qa-card" id="qa-30"
+           data-q="Q10 如何导入海外或国内薪酬中位值？"
+           data-section="五、预算管理">
+        <div class="qa-question" onclick="toggleQA(30)">
+          <span class="q-num">Q10</span>
+          <span class="q-text">如何导入海外或国内薪酬中位值？</span>
+          <span class="q-toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer" id="ans-30">
+          <div class="answer-inner">
+<p class="sub-step">▸ 海外薪酬中位值</p>
+<p><span class="path-tag">【预算管理】</span>→<span class="path-tag">【海外薪酬中位值】</span>→ 下载模板填写导入</p>
+<p>字段：二级部门名称、国家、地区、职级、职类、计薪币种、目标年收中位值、基本工资、绩效工资、月薪标准、年终奖基数、度假金、圣诞金等</p>
+<p class="sub-step">▸ 国内薪酬中位值</p>
+<p><span class="path-tag">【预算管理】</span>→<span class="path-tag">【国内薪酬中位值】</span>→ 下载模板填写导入</p>
+<p>字段：城市级别、职级、职类、目标年收中位值、绩效工资占比（小数，最多2位）、标准奖金月份（小数，最多1位）、基本工资、岗位工资、绩效工资、月薪标准、年终奖基数</p>
+<p>● 金额类字段均填整数，不带单位和逗号</p>
+<p>● 所有数据校验通过才会导入成功</p>
+<div class="img-wrap"><img src="images/img_087.png" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_088.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_089.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_086.png" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="qa-card" id="qa-31"
+           data-q="Q11 如何导入TMT成员人力成本预算？"
+           data-section="五、预算管理">
+        <div class="qa-question" onclick="toggleQA(31)">
+          <span class="q-num">Q11</span>
+          <span class="q-text">如何导入TMT成员人力成本预算？</span>
+          <span class="q-toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer" id="ans-31">
+          <div class="answer-inner">
+<p>操作路径：<span class="path-tag">【预算管理】</span>→<span class="path-tag">【TMT成员人力成本预算】</span>→ 下载模板填写导入。</p>
+<p>字段包括：成本中心（必填，下拉选择）、二级部门（必填，下拉选择）、人力成本预算总额（必填整数，单位为元）。</p>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="qa-card" id="qa-32"
+           data-q="Q12 如何更新预算明细？哪些科目可以被更新？"
+           data-section="五、预算管理">
+        <div class="qa-question" onclick="toggleQA(32)">
+          <span class="q-num">Q12</span>
+          <span class="q-text">如何更新预算明细？哪些科目可以被更新？</span>
+          <span class="q-toggle">&#9660;</span>
+        </div>
+        <div class="qa-answer" id="ans-32">
+          <div class="answer-inner">
+<p>操作路径：在预算方案详情页点击「更新预算明细」→ 下载Excel模板 → 对科目数据进行更新 → 上传。</p>
+<p>更新后会自动进行预算测算。</p>
+<p>可更新范围：</p>
+<p class="sub-step">▸ 自己负责部门下的员工：可更新除「基本工资」「岗位工资」「绩效工资」「月薪标准」以外的所有科目</p>
+<p class="sub-step">▸ 被关联的员工（成本中心存在分摊或处于外派中的员工）：可更新所有科目</p>
+<p class="sub-step">▸ 关联查看的组织的预算明细：仅可被查看，不可更新</p>
+<div class="img-wrap"><img src="images/img_090.jpg" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<div class="img-wrap"><img src="images/img_091.png" alt="操作截图" decoding="async" loading="lazy" onclick="lbOpen(this.src)" /></div>
+<p>— END —</p>
+<p>如有疑问，请联系 HSSC 支持组</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+</main>
+
+<div class="lb-overlay" id="lbOverlay" onclick="lbBgClick(event)">
+  <button class="lb-close" onclick="lbHide(event)">&#10005;</button>
+  <img id="lbImg" src="" alt="操作截图">
+  <div class="lb-hint">点击空白或按 ESC 关闭</div>
+</div>
+
+<button id="backTop" onclick="toTop()" title="回到顶部">&#8593;</button>
+
+<script>
+/* ─── 展开/折叠 ─── */
+function toggleQA(n){var c=document.getElementById('qa-'+n);if(c)c.classList.toggle('open')}
+function expandAll(){document.querySelectorAll('.qa-card:not(.hidden)').forEach(function(c){c.classList.add('open')})}
+function collapseAll(){document.querySelectorAll('.qa-card').forEach(function(c){c.classList.remove('open')})}
+
+/* ─── 回到顶部 ─── */
+function toTop(){
+  window.cancelAnimationFrame(window._stRaf);
+  var st=window.scrollY,d=0,t=performance.now()+350;
+  (function step(now){
+    d=Math.min(1,(now-t+350)/350);
+    window.scrollTo(0,st*(1-d));
+    if(d<1)window._stRaf=requestAnimationFrame(step);
+  })(t);
+}
+
+/* ─── 搜索 ─── */
+function searchFAQ(){
+  var kw=document.getElementById('searchInput').value.trim();
+  var badge=document.getElementById('resultBadge');
+  document.getElementById('searchClear').style.display=kw?'flex':'none';
+  document.querySelectorAll('.search-hl').forEach(function(el){el.outerHTML=el.textContent});
+  var cards=document.querySelectorAll('.qa-card'),v=0;
+  cards.forEach(function(card){
+    var t=(card.dataset.q||'')+' '+card.textContent;
+    var m=!kw||t.toLowerCase().includes(kw.toLowerCase());
+    card.classList.toggle('hidden',!m);
+    if(m){
+      v++;card.classList.add('open');
+      if(kw){
+        var qEl=card.querySelector('.q-text');
+        if(qEl)qEl.innerHTML=hl(qEl.textContent,kw);
+        card.querySelectorAll('.answer-inner p').forEach(function(p){
+          if(p.textContent.toLowerCase().includes(kw.toLowerCase()))p.innerHTML=hl(p.textContent,kw)
+        })
+      }else card.classList.remove('open')
+    }
+  });
+  document.querySelectorAll('.faq-section').forEach(function(s){
+    s.style.display=Array.from(s.querySelectorAll('.qa-card')).some(function(c){return!c.classList.contains('hidden')})?'':'none'
+  });
+  badge.textContent=kw?'找到 '+v+' 条':'';
+  badge.style.display=kw&&v>0?'inline-block':'none';
+  document.getElementById('noResult').style.display=(kw&&v===0)?'block':'none';
+}
+
+function hl(t,kw){
+  return t.replace(new RegExp('('+kw.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'),'<mark class="search-hl">$1</mark>')
+}
+function clearSearch(){document.getElementById('searchInput').value='';searchFAQ()}
+
+/* ─── 灯箱 ─── */
+function lbOpen(src){
+  document.getElementById('lbImg').src=src;
+  document.getElementById('lbOverlay').classList.add('active');
+  document.body.style.overflow='hidden';
+}
+function lbHide(e){
+  if(e)e.stopPropagation();
+  document.getElementById('lbOverlay').classList.remove('active');
+  document.body.style.overflow='';
+}
+function lbBgClick(e){if(e.target===e.currentTarget)lbHide()}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')lbHide(null)});
+
+/* ─── 导航高亮 ─── */
+function navClick(el){
+  document.querySelectorAll('.sidebar a').forEach(function(a){a.classList.remove('active')});
+  el.classList.add('active');
+}
+
+/* ─── 滚动监听 ─── */
+(function(){
+  var secs=document.querySelectorAll('.faq-section'),
+      navs=document.querySelectorAll('.sidebar a'),
+      ticking=false;
+  window.addEventListener('scroll',function(){
+    if(!ticking){
+      requestAnimationFrame(function(){
+        var y=window.scrollY+120;
+        var activeIdx=-1;
+        for(var i=secs.length-1;i>=0;i--){
+          if(secs[i].offsetTop<=y){activeIdx=i;break}
+        }
+        navs.forEach(function(a,i){a.classList.toggle('active',i===activeIdx)});
+        var bt=document.getElementById('backTop');
+        bt.classList.toggle('visible',window.scrollY>300);
+        ticking=false;
+      });
+      ticking=true;
+    }
+  },{passive:true})();
+})();
+
+/* ─── 图片懒加载增强 ─── */
+document.addEventListener('DOMContentLoaded',function(){
+  var imgs=document.querySelectorAll('.img-wrap img');
+  if('IntersectionObserver' in window){
+    var obs=new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          var img=entry.target;
+          if(img.dataset.src){img.src=img.src;delete img.dataset.src}
+          obs.unobserve(img);
+        }
+      });
+    },{rootMargin:'200px'});
+    imgs.forEach(function(img){obs.observe(img)});
+  }
+  /* 所有图片加载完成后显示 */
+  imgs.forEach(function(img){
+    if(img.complete)img.classList.add('loaded');
+    else img.addEventListener('load',function(){this.classList.add('loaded')});
+    img.addEventListener('error',function(){this.classList.add('loaded');this.alt='图片加载失败'});
+  });
+})();
+
+/* ─── 初始状态：默认展开第一个章节 ─── */
+document.querySelectorAll('#section-0 .qa-card').forEach(function(c){c.classList.add('open')});
+var initNav=document.querySelectorAll('.sidebar a');
+if(initNav[0])initNav[0].classList.add('active');
+</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","name":"新HRMS系统常见问题FAQ","description":"基于《新HRMS系统操作SOP》整理"}</script>
+</body></html>
